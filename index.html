@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light" />
+<title>Taberna de Castilla · Tetuán, Madrid</title>
+<meta name="description" content="Taberna de Castilla, taberna familiar en la Glorieta de Miguel Rubiales 4 (Tetuán, Madrid). Tapa con cada consumición, raciones, menú del día y celebraciones. Reserva tu mesa." />
+<meta name="theme-color" content="#7E2626" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fuentes sin bloquear el renderizado: primero pinta con la fuente del sistema -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap"></noscript>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Taberna de Castilla",
+"address":{"@type":"PostalAddress","streetAddress":"Glorieta de Miguel Rubiales, 4","postalCode":"28039","addressLocality":"Madrid","addressCountry":"ES"},
+"geo":{"@type":"GeoCoordinates","latitude":40.45319,"longitude":-3.70616},
+"telephone":"+34914384718","servesCuisine":"Española, tapas","priceRange":"€",
+"openingHoursSpecification":[
+{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"23:59"},
+{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"11:00","closes":"17:00"}]}
+</script>
+<style>
+  :root{
+    --bg:#F4EDE1; --bg-2:#EADFCB; --paper:#FFFBF4; --sand:#E3D4BA;
+    --ink:#22170F; --ink-soft:#3B2C21; --ink-mute:#76675A;
+    --accent:#8E2B2B; --accent-2:#6F1F1F;      /* vino */
+    --ochre:#C8902E;                            /* mostaza */
+    --tile:#2C4F7C;                             /* azulejo */
+    --board:#1E2723; --board-ink:#F3EEE3; --chalk:#E9D9A6;
+    --line:rgba(34,23,15,.13);
+    --shadow:0 26px 60px rgba(55,30,15,.15);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --maxw:1180px;
+    color-scheme:only light;
+  }
+  html{background:#F4EDE1}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,.serif{font-family:"Fraunces",Georgia,"Times New Roman",serif;font-weight:400;line-height:1.06;letter-spacing:-.012em}
+  em{font-style:italic}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#fff}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .kicker{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .muted{color:var(--ink-mute)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+  /* Cenefa de azulejo (SVG en línea, sin imágenes externas) */
+  .tiles{height:26px;background-color:var(--paper);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cg fill='none' stroke='%232C4F7C' stroke-width='1.4'%3E%3Cpath d='M13 2 L24 13 L13 24 L2 13Z'/%3E%3Ccircle cx='13' cy='13' r='3.2' fill='%23C8902E' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 26px;transition:all .4s var(--ease);border-bottom:1px solid transparent}
+  nav.scrolled{background:rgba(255,251,244,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 26px;border-bottom:1px solid var(--line)}
+  nav .brand{font-family:"Fraunces",Georgia,serif;font-size:1.25rem;display:flex;align-items:center;gap:10px}
+  nav .brand .mark{width:22px;height:22px;flex:none}
+  nav .links{display:flex;gap:28px;align-items:center}
+  nav .links a{font-size:.85rem;color:var(--ink-soft);position:relative;transition:color .3s}
+  nav .links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--accent);transition:width .3s var(--ease)}
+  nav .links a:hover{color:var(--ink)} nav .links a:hover::after{width:100%}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;font-size:.88rem;font-weight:500;
+    cursor:pointer;border:1px solid transparent;transition:transform .3s var(--ease),box-shadow .3s,background .3s,color .3s,border-color .3s;font-family:inherit}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(142,43,43,.32);background:var(--accent-2)}
+  .btn-ghost{border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+  /* HERO */
+  .hero{position:relative;padding:128px 0 72px;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-12%;right:-8%;width:46vw;height:46vw;max-width:560px;max-height:560px;
+    background:radial-gradient(circle,rgba(142,43,43,.13),transparent 68%);z-index:0}
+  .hero::after{content:"";position:absolute;bottom:4%;left:-6%;width:30vw;height:30vw;max-width:360px;max-height:360px;
+    background:radial-gradient(circle,rgba(44,79,124,.11),transparent 68%);z-index:0}
+  .hero-grid{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 26px;
+    display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:22px;min-height:34px;
+    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+    background:var(--paper);border:1px solid var(--line);padding:8px 14px;border-radius:100px}
+  .eyebrow .live{width:7px;height:7px;border-radius:50%;background:#9a9a9a;flex:none}
+  .eyebrow.open .live{background:#4fae53;box-shadow:0 0 8px #4fae53}
+  .hero h1{font-size:clamp(2.7rem,6.4vw,5rem);margin-bottom:22px;text-wrap:balance}
+  .hero h1 em{color:var(--accent)}
+  .hero .sub{font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:clamp(1.05rem,2vw,1.35rem);color:var(--ink-soft);max-width:38ch;margin-bottom:30px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+  .hero-rating{display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--ink-soft);flex-wrap:wrap}
+  .stars{position:relative;display:inline-block;letter-spacing:2px;color:rgba(142,43,43,.22)}
+  .stars::before{content:"★★★★★";position:absolute;inset:0;width:var(--pct,86%);overflow:hidden;color:var(--accent);white-space:nowrap}
+  .hero-rating b{color:var(--ink)}
+
+  /* Pizarra (hero visual) */
+  .board-wrap{position:relative;max-width:470px;margin-left:auto}
+  .board{position:relative;background:var(--board);color:var(--board-ink);border-radius:18px;padding:56px 34px 30px;
+    box-shadow:var(--shadow),inset 0 0 0 10px #5B3A22,inset 0 0 0 12px #3E2715;transform:rotate(1.2deg)}
+  .board::after{content:"";position:absolute;inset:12px;border-radius:8px;pointer-events:none;
+    background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.06),transparent 60%),radial-gradient(ellipse at 80% 90%,rgba(255,255,255,.04),transparent 55%)}
+  .board .bt{font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:1.65rem;color:var(--chalk);text-align:center}
+  .board .bd{text-align:center;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;opacity:.65;margin:6px 0 22px}
+  .board ul{list-style:none}
+  .board li{display:flex;align-items:baseline;gap:10px;padding:9px 0;font-size:.98rem}
+  .board li::after{content:"";flex:1;order:2;border-bottom:1.5px dotted rgba(243,238,227,.28);transform:translateY(-4px)}
+  .board li span:first-child{order:1} .board li span:last-child{order:3;color:var(--chalk);font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:.9rem}
+  .board .bf{margin-top:18px;text-align:center;font-size:.78rem;opacity:.7}
+  .stamp{position:absolute;left:-44px;top:-44px;width:124px;height:124px;border-radius:50%;
+    background:var(--ochre);color:#2a1a08;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    transform:rotate(-12deg);box-shadow:0 14px 34px rgba(90,55,10,.3);border:3px dashed rgba(42,26,8,.35);outline:6px solid var(--ochre)}
+  .stamp b{font-family:"Fraunces",Georgia,serif;font-size:1.05rem;line-height:1.05;font-weight:500}
+  .stamp small{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;margin-top:5px}
+
+  /* REVEAL — solo se oculta si hay JS, así nunca se queda en blanco */
+  .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .js .reveal.is-visible{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+  @media (prefers-reduced-motion:reduce){ .js .reveal{opacity:1;transform:none;transition:none} html{scroll-behavior:auto} .board,.stamp{transform:none} }
+
+  .section-head{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .section-head h2{font-size:clamp(2rem,4.6vw,3.3rem);margin-top:12px;text-wrap:balance}
+
+  /* LA CASA */
+  .concept{background:var(--bg-2);padding:clamp(80px,12vh,140px) 0}
+  .concept .lead{max-width:56ch;font-size:clamp(1.1rem,2.1vw,1.4rem);color:var(--ink-soft);margin-top:24px}
+  .concept .lead em{color:var(--accent);font-family:"Fraunces",Georgia,serif}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:60px auto 0;max-width:var(--maxw);padding:0 26px}
+  .pillar{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px 26px}
+  .pillar .num{font-family:"Fraunces",Georgia,serif;font-style:italic;color:var(--tile);font-size:1.1rem}
+  .pillar h3{font-size:1.32rem;margin:12px 0 8px}
+  .pillar p{color:var(--ink-mute);font-size:.94rem}
+
+  /* CARTA */
+  .carta{padding:clamp(90px,13vh,150px) 0}
+  .carta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px}
+  .menu-col{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:28px 26px 22px}
+  .menu-col h3{font-size:1.4rem;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .menu-col h3::before{content:"";width:10px;height:10px;transform:rotate(45deg);background:var(--ochre);flex:none}
+  .menu-col .ms{font-size:.85rem;color:var(--ink-mute);margin-bottom:14px}
+  .item{padding:13px 0;border-top:1px dashed var(--line)}
+  .item .n{font-weight:500}
+  .item p{font-size:.88rem;color:var(--ink-mute);margin-top:2px}
+  .tag{display:inline-block;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(142,43,43,.35);border-radius:100px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+  .menu-dia{margin-top:26px;display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap;
+    background:var(--board);color:var(--board-ink);border-radius:20px;padding:26px 30px}
+  .menu-dia h3{font-size:1.6rem;color:var(--chalk);font-style:italic}
+  .menu-dia p{opacity:.78;font-size:.92rem;max-width:52ch}
+  .carta-note{text-align:center;margin-top:30px;font-size:.82rem;color:var(--ink-mute)}
+
+  /* EVENTOS */
+  .eventos{background:var(--bg-2);padding:clamp(90px,13vh,150px) 0}
+  .ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px}
+  .ev{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px;overflow:hidden;
+    transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+  .ev:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .ev .date{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;min-width:64px;padding:0 12px;height:68px;border-radius:12px;
+    background:var(--accent);color:#fff;margin-bottom:18px;line-height:1}
+  .ev .date b{font-family:"Fraunces",Georgia,serif;font-size:1.7rem;font-weight:500}
+  .ev .date small{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+  .ev .date.alt{background:var(--tile)} .ev .date.alt2{background:var(--ochre);color:#2a1a08}
+  .ev h3{font-size:1.32rem;margin-bottom:8px}
+  .ev p{color:var(--ink-mute);font-size:.92rem}
+  .ev .cd{margin-top:16px;font-size:.8rem;color:var(--accent);font-weight:600;letter-spacing:.04em;min-height:1.3em}
+  .ev a.more{display:inline-block;margin-top:14px;font-size:.86rem;color:var(--accent);font-weight:500;border-bottom:1px solid rgba(142,43,43,.35)}
+
+  /* RESERVA */
+  .reserva{padding:clamp(90px,13vh,150px) 0}
+  .reserva-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:60px;align-items:start;max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .reserva-info h2{font-size:clamp(2rem,4.6vw,3.1rem);margin:12px 0 18px;text-wrap:balance}
+  .reserva-info p{color:var(--ink-soft);max-width:42ch;margin-bottom:28px}
+  .info-rows{border-top:1px solid var(--line)}
+  .info-row{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .info-row .k{color:var(--ink-mute)} .info-row .v{color:var(--ink);text-align:right;font-weight:500}
+  .quick-actions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .wa{background:#25D366;color:#08321b} .wa:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,211,102,.3)}
+  form.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:32px;box-shadow:var(--shadow)}
+  form.card h3{font-size:1.42rem;margin-bottom:6px}
+  form.card .fsub{color:var(--ink-mute);font-size:.85rem;margin-bottom:22px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:7px}
+  .field input,.field select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--ink);font-family:inherit;font-size:1rem;transition:border-color .3s}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--accent)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  form.card .submit{width:100%;justify-content:center;margin-top:8px}
+  .form-success{display:none;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:26px 10px}
+  form.card.sent .form-body{display:none} form.card.sent .form-success{display:flex}
+  .check-c{width:64px;height:64px}
+  .check-c circle,.check-c path{stroke:var(--accent);stroke-width:3;fill:none;stroke-linecap:round}
+  .check-c circle{stroke-dasharray:190;stroke-dashoffset:190;animation:draw .6s var(--ease) forwards}
+  .check-c path{stroke-dasharray:50;stroke-dashoffset:50;animation:draw .4s var(--ease) .5s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .form-success h4{font-family:"Fraunces",Georgia,serif;font-size:1.4rem;font-weight:400}
+  .form-success p{color:var(--ink-mute);font-size:.88rem;max-width:32ch}
+
+  /* CÓMO LLEGAR */
+  .place{background:var(--bg-2);padding:clamp(80px,12vh,140px) 0}
+  .place-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:46px;align-items:center;max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .place h2{font-size:clamp(2rem,4.6vw,3.1rem);margin:12px 0 18px}
+  .map-embed{position:relative;aspect-ratio:16/11;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);
+    background:var(--sand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg stroke='%23cdbb9b' stroke-width='10' fill='none'%3E%3Cpath d='M0 40 H120 M0 95 H120 M35 0 V120 M90 0 V120'/%3E%3C/g%3E%3C/svg%3E")}
+  .map-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .map-btn{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:0;background:transparent;cursor:pointer;font-family:inherit;color:var(--ink)}
+  .map-btn .pin{width:44px;height:44px}
+  .map-btn span{background:var(--paper);border:1px solid var(--line);padding:10px 18px;border-radius:100px;font-size:.88rem;font-weight:500;box-shadow:0 8px 20px rgba(55,30,15,.12)}
+
+  footer{padding:60px 26px 44px;background:var(--bg)}
+  .foot-in{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+  footer .brand{font-family:"Fraunces",Georgia,serif;font-size:1.8rem}
+  footer .muted{font-size:.85rem;margin-top:8px;max-width:34ch}
+  footer .cols{display:flex;gap:54px;flex-wrap:wrap}
+  footer .cols .col a,footer .cols .col span{display:block;color:var(--ink-mute);font-size:.9rem;margin-bottom:9px;transition:color .3s}
+  footer .cols .col a:hover{color:var(--accent)}
+  footer .cols .col .h{color:var(--ink);font-weight:600;margin-bottom:14px}
+  .demo-note{max-width:var(--maxw);margin:36px auto 0;padding:12px 16px;border:1px dashed var(--line);border-radius:12px;font-size:.78rem;color:var(--ink-mute);text-align:center}
+
+  /* Botón fijo de reserva en móvil */
+  .sticky-cta{display:none}
+
+  @media (max-width:900px){
+    nav .links{display:none}
+    .hero{padding-top:108px}
+    .hero-grid{grid-template-columns:1fr;gap:56px}
+    .board-wrap{margin:0 auto;max-width:420px}
+    .pillars,.ev-grid{grid-template-columns:1fr}
+    .carta-grid{grid-template-columns:1fr 1fr;gap:18px}
+    .reserva-grid,.place-grid{grid-template-columns:1fr;gap:36px}
+  }
+  @media (max-width:600px){
+    .carta-grid{grid-template-columns:1fr}
+    .row2{grid-template-columns:1fr}
+    nav{padding:14px 18px} nav.scrolled{padding:10px 18px}
+    nav > .btn{display:none}
+    .wrap,.section-head,.pillars,.reserva-grid,.place-grid,.hero-grid{padding-left:18px;padding-right:18px}
+    .board{padding:30px 22px 26px}
+    .board{padding-top:58px}
+    .stamp{width:90px;height:90px;left:-10px;top:-34px;outline-width:4px}
+    .stamp b{font-size:.78rem}
+    .stamp small{font-size:.48rem;letter-spacing:.1em}
+    .foot-in{flex-direction:column;align-items:flex-start}
+    .menu-dia{padding:22px}
+    .sticky-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:90;gap:10px;
+      transform:translateY(130%);transition:transform .4s var(--ease)}
+    .sticky-cta.show{transform:none}
+    .sticky-cta .btn{flex:1;justify-content:center;box-shadow:0 10px 26px rgba(34,23,15,.22)}
+    .sticky-cta .btn-ghost{background:var(--paper)}
+    footer{padding-bottom:96px}
+  }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js")</script>
+
+<nav id="nav" aria-label="Principal">
+  <a class="brand" href="#top" aria-label="Taberna de Castilla, inicio">
+    <svg class="mark" viewBox="0 0 22 22" aria-hidden="true"><path d="M11 1 L21 11 L11 21 L1 11Z" fill="#8E2B2B"/><path d="M11 6 L16 11 L11 16 L6 11Z" fill="#C8902E"/></svg>
+    Taberna de Castilla
+  </a>
+  <div class="links">
+    <a href="#casa">La casa</a>
+    <a href="#carta">Carta</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#donde">Cómo llegar</a>
+  </div>
+  <a class="btn btn-primary" href="#reserva">Reservar</a>
+</nav>
+
+<main>
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow reveal" id="openNow"><span class="live"></span><span class="txt">Tetuán · Glorieta de Miguel Rubiales</span></span>
+      <h1 class="reveal d1">Tu caña viene<br><em>con tapa</em>. Siempre.</h1>
+      <p class="sub reveal d2">Taberna familiar de barrio en Tetuán. Raciones generosas, menú del día y un local lleno de historia para celebrar lo que haga falta.</p>
+      <div class="hero-actions reveal d2">
+        <a class="btn btn-primary" href="#reserva">Reservar mesa</a>
+        <a class="btn btn-ghost" href="#carta">Ver la carta</a>
+      </div>
+      <div class="hero-rating reveal d3">
+        <span class="stars" style="--pct:86%" aria-hidden="true">★★★★★</span>
+        <span><b>4,3</b> · <b>265</b> reseñas en Google</span>
+      </div>
+    </div>
+    <div class="board-wrap reveal d1" aria-label="Pizarra del día">
+      <div class="board">
+        <div class="bt">Hoy en la pizarra</div>
+        <div class="bd" id="boardDay">Menú del día</div>
+        <ul>
+          <li><span>Lentejas estofadas</span><span>1.º</span></li>
+          <li><span>Ensalada mixta de la casa</span><span>1.º</span></li>
+          <li><span>Pollo al ajillo</span><span>2.º</span></li>
+          <li><span>Merluza a la romana</span><span>2.º</span></li>
+          <li><span>Flan casero o fruta</span><span>postre</span></li>
+        </ul>
+        <div class="bf">Cambia cada día · pregunta en la barra</div>
+      </div>
+      <div class="stamp" aria-hidden="true"><b>Tapa con<br>cada bebida</b><small>en Tetuán</small></div>
+    </div>
+  </div>
+</header>
+<div class="tiles" aria-hidden="true"></div>
+
+<!-- LA CASA -->
+<section class="concept" id="casa">
+  <div class="section-head reveal">
+    <p class="kicker">La casa</p>
+    <h2>Una taberna de las de siempre</h2>
+    <p class="lead">En Taberna de Castilla te sientes como en casa. Pides una caña y llega <em>con su tapa</em>, la cocina sale generosa y a buen precio, y el local, lleno de objetos antiguos, merece la visita por sí solo.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar reveal d1"><span class="num">01</span><h3>Tapa con cada bebida</h3><p>Caña, vino o refresco: cada consumición lleva su tapa. Como manda la tradición madrileña.</p></div>
+    <div class="pillar reveal d2"><span class="num">02</span><h3>Cocina de casa</h3><p>Raciones para compartir, menú del día y arroces por encargo. Calidad, cantidad y buen precio.</p></div>
+    <div class="pillar reveal d3"><span class="num">03</span><h3>Un trato de familia</h3><p>Un negocio familiar que se acuerda de ti. Ideal para comidas tranquilas, grupos y celebraciones.</p></div>
+  </div>
+</section>
+
+<!-- CARTA -->
+<section class="carta" id="carta">
+  <div class="section-head reveal">
+    <p class="kicker">La carta</p>
+    <h2>Para picar, para compartir, para celebrar</h2>
+  </div>
+  <div class="wrap">
+    <div class="carta-grid">
+      <div class="menu-col reveal d1">
+        <h3>Para picar</h3><p class="ms">Para acompañar la caña.</p>
+        <div class="item"><div class="n">Croquetas caseras</div><p>De jamón, cremosas por dentro.</p></div>
+        <div class="item"><div class="n">Patatas bravas</div><p>Con la salsa de la casa.</p></div>
+        <div class="item"><div class="n">Torreznos</div><p>Crujientes, como deben ser.</p></div>
+        <div class="item"><div class="n">Tabla de ibéricos y queso</div><p>Para empezar con calma.</p></div>
+      </div>
+      <div class="menu-col reveal d2">
+        <h3>Raciones</h3><p class="ms">Generosas y para compartir.</p>
+        <div class="item"><div class="n">Calamares a la romana</div><p>Con su limón.</p></div>
+        <div class="item"><div class="n">Huevos rotos con jamón</div><p>Sobre patata frita.</p></div>
+        <div class="item"><div class="n">Oreja a la plancha</div><p>Con ajo y perejil.</p></div>
+        <div class="item"><div class="n">Pimientos de Padrón</div><p>Unos pican y otros no.</p></div>
+      </div>
+      <div class="menu-col reveal d3">
+        <h3>Para celebrar</h3><p class="ms">Mejor con reserva.</p>
+        <div class="item"><div class="n">Arroz con bogavante <span class="tag">por encargo</span></div><p>Para dos o más. Pídelo al reservar.</p></div>
+        <div class="item"><div class="n">Chuletón a la piedra</div><p>Para compartir en la mesa.</p></div>
+        <div class="item"><div class="n">Postre especial</div><p>Para cumpleaños y aniversarios: dínoslo y lo preparamos.</p></div>
+      </div>
+    </div>
+    <div class="menu-dia reveal">
+      <div><h3>Menú del día</h3><p>Primero, segundo, postre, pan y bebida. Cambia cada día: lo ves arriba en la pizarra o te lo cantamos en la barra.</p></div>
+      <a class="btn btn-primary" href="tel:+34914384718">Preguntar el de hoy</a>
+    </div>
+    <p class="carta-note">Carta de muestra para la demo · aquí va vuestra carta real con sus precios</p>
+  </div>
+</section>
+
+<!-- EVENTOS -->
+<section class="eventos" id="eventos">
+  <div class="section-head reveal">
+    <p class="kicker">Eventos</p>
+    <h2>Aquí se celebra todo</h2>
+  </div>
+  <div class="wrap">
+    <div class="ev-grid">
+      <article class="ev reveal d1">
+        <div class="date"><b>31</b><small>octubre</small></div>
+        <h3>Fiesta de Halloween</h3>
+        <p>La noche más terrorífica del barrio: decoración, chupitos y comida para todos. Plazas limitadas, mejor reservar.</p>
+        <div class="cd" data-countdown="2026-10-31T20:00:00+01:00"></div>
+        <a class="more" href="#reserva">Apuntarse</a>
+      </article>
+      <article class="ev reveal d2">
+        <div class="date alt"><b>🎂</b><small>todo el año</small></div>
+        <h3>Cumpleaños y aniversarios</h3>
+        <p>Avísanos al reservar y preparamos la mesa con detalles: globos, postre especial y lo que se os ocurra.</p>
+        <a class="more" href="#reserva">Reservar celebración</a>
+      </article>
+      <article class="ev reveal d3">
+        <div class="date alt2"><b>🥂</b><small>a medida</small></div>
+        <h3>Eventos privados y grupos</h3>
+        <p>Comidas de empresa, cenas de Navidad y reuniones de amigos. Menú cerrado a medida y el local para vosotros.</p>
+        <a class="more" href="#reserva">Pedir presupuesto</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVA -->
+<section class="reserva" id="reserva">
+  <div class="reserva-grid">
+    <div class="reserva-info reveal">
+      <p class="kicker">Reservas</p>
+      <h2>Guárdate tu mesa en la taberna</h2>
+      <p>Para comidas, cenas, grupos y celebraciones. Dinos cuántos sois y a qué hora, y te confirmamos enseguida.</p>
+      <div class="info-rows">
+        <div class="info-row"><span class="k">Lunes a sábado</span><span class="v">08:00 – 00:00</span></div>
+        <div class="info-row"><span class="k">Domingo</span><span class="v">11:00 – 17:00</span></div>
+        <div class="info-row"><span class="k">Dónde</span><span class="v">Gta. de Miguel Rubiales, 4 · Tetuán</span></div>
+        <div class="info-row"><span class="k">Teléfono</span><span class="v"><a href="tel:+34914384718">914 38 47 18</a></span></div>
+      </div>
+      <div class="quick-actions">
+        <a class="btn wa" href="https://wa.me/34673418596?text=Hola%2C%20quer%C3%ADa%20reservar%20mesa%20en%20Taberna%20de%20Castilla" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+        <a class="btn btn-ghost" href="tel:+34914384718">Llamar</a>
+      </div>
+    </div>
+    <form class="card reveal d1" id="resForm" novalidate>
+      <div class="form-body">
+        <h3>Solicitar reserva</h3>
+        <p class="fsub">Te respondemos para confirmar disponibilidad.</p>
+        <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre" /></div>
+        <div class="row2">
+          <div class="field"><label for="pers">Personas</label>
+            <select id="pers" name="personas" required><option value="">Elegir</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7–10</option><option>Más de 10</option></select></div>
+          <div class="field"><label for="tel">Teléfono</label><input id="tel" name="tel" type="tel" required autocomplete="tel" placeholder="6XX XXX XXX" /></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="fecha">Fecha</label><input id="fecha" name="fecha" type="date" required /></div>
+          <div class="field"><label for="hora">Hora</label><input id="hora" name="hora" type="time" required /></div>
+        </div>
+        <div class="field"><label for="motivo">Motivo</label>
+          <select id="motivo" name="motivo"><option>Comida o cena</option><option>Cumpleaños / aniversario</option><option>Evento privado o grupo</option><option>Fiesta de Halloween</option></select></div>
+        <button class="btn btn-primary submit" type="submit">Enviar solicitud</button>
+      </div>
+      <div class="form-success" role="status">
+        <svg class="check-c" viewBox="0 0 66 66" aria-hidden="true"><circle cx="33" cy="33" r="30"/><path d="M20 34 l9 9 l17 -19"/></svg>
+        <h4>¡Solicitud recibida!</h4>
+        <p>En la web real esto llega directo al WhatsApp o al correo de la taberna. Esto es una muestra.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- CÓMO LLEGAR -->
+<section class="place" id="donde">
+  <div class="place-grid">
+    <div class="reveal">
+      <p class="kicker">Cómo llegar</p>
+      <h2>En la glorieta,<br>en pleno Tetuán</h2>
+      <p class="muted" style="max-width:40ch;margin-bottom:26px">Glorieta de Miguel Rubiales, 4 · 28039 Madrid. Salas climatizadas y WiFi gratis.</p>
+      <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Taberna+de+Castilla+Glorieta+Miguel+Rubiales+4+Madrid" target="_blank" rel="noopener">Abrir en Google Maps</a>
+    </div>
+    <div class="map-embed reveal d1" id="map">
+      <button class="map-btn" type="button" id="mapBtn" aria-label="Cargar el mapa">
+        <svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-4 0-7 3-7 7 0 5.2 7 13 7 13s7-7.8 7-13c0-4-3-7-7-7z" fill="#8E2B2B"/><circle cx="12" cy="9" r="2.6" fill="#FFFBF4"/></svg>
+        <span>Ver el mapa</span>
+      </button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <div class="brand">Taberna de Castilla</div>
+      <p class="muted">Taberna familiar con tapa en cada bebida. Tetuán, Madrid.</p>
+    </div>
+    <div class="cols">
+      <div class="col"><span class="h">Visítanos</span><span>Gta. de Miguel Rubiales, 4</span><span>L–S 08:00–00:00 · D 11:00–17:00</span><a href="tel:+34914384718">914 38 47 18</a></div>
+      <div class="col"><span class="h">Enlaces</span><a href="#carta">Carta</a><a href="#eventos">Eventos</a><a href="#reserva">Reservar</a><a href="#donde">Cómo llegar</a></div>
+    </div>
+  </div>
+  <div class="demo-note">Sitio de demostración · diseño de muestra, no oficial. La carta, el menú del día y algunos textos son de ejemplo y se ajustan a los reales.</div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn-ghost" href="tel:+34914384718">Llamar</a>
+  <a class="btn btn-primary" href="#reserva">Reservar mesa</a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function safe(fn,name){try{fn();}catch(e){console.warn("["+name+"]",e);}}
+  var MADRID="Europe/Madrid";
+  function madridNow(){
+    var p=new Intl.DateTimeFormat("en-GB",{timeZone:MADRID,weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());
+    var o={};p.forEach(function(x){o[x.type]=x.value;});
+    var days={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+    return {d:days[o.weekday],m:(parseInt(o.hour,10)%24)*60+parseInt(o.minute,10)};
+  }
+  // Horario: L–S 08:00–24:00, D 11:00–17:00
+  var H={0:[660,1020],1:[480,1440],2:[480,1440],3:[480,1440],4:[480,1440],5:[480,1440],6:[480,1440]};
+  function fmt(m){m=m%1440;var h=Math.floor(m/60),mm=m%60;return (h<10?"0":"")+h+":"+(mm<10?"0":"")+mm;}
+  function initOpen(){
+    var el=document.getElementById("openNow");if(!el)return;var t=el.querySelector(".txt");
+    var n=madridNow(),h=H[n.d];
+    if(n.m>=h[0]&&n.m<h[1]){el.classList.add("open");t.textContent="Abierto hoy hasta las "+fmt(h[1]);}
+    else if(n.m<h[0]){t.textContent="Hoy abrimos a las "+fmt(h[0]);}
+    else{var nx=H[(n.d+1)%7];t.textContent="Cerrado · mañana abrimos a las "+fmt(nx[0]);}
+    var bd=document.getElementById("boardDay");
+    if(bd){var dn=["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"][n.d];bd.textContent=dn+" · menú del día";}
+  }
+  function initNav(){var nav=document.getElementById("nav"),cta=document.getElementById("stickyCta"),res=document.getElementById("reserva");
+    var f=function(){var y=window.scrollY;nav.classList.toggle("scrolled",y>40);
+      if(cta&&res){var r=res.getBoundingClientRect();cta.classList.toggle("show",y>520&&!(r.top<window.innerHeight&&r.bottom>0));}};
+    f();window.addEventListener("scroll",f,{passive:true});}
+  function initReveals(){
+    var els=document.querySelectorAll(".reveal");
+    if(!("IntersectionObserver" in window)){els.forEach(function(e){e.classList.add("is-visible");});return;}
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("is-visible");io.unobserve(x.target);}});},{threshold:0.05,rootMargin:"0px 0px -6% 0px"});
+    els.forEach(function(e){io.observe(e);});
+    setTimeout(function(){els.forEach(function(e){e.classList.add("is-visible");});},5000);
+  }
+  function initCountdown(){
+    document.querySelectorAll("[data-countdown]").forEach(function(el){
+      var target=new Date(el.getAttribute("data-countdown")).getTime();
+      function tick(){var d=target-Date.now();
+        if(d<=0){el.textContent="¡Es hoy!";return;}
+        var days=Math.floor(d/864e5),hrs=Math.floor(d%864e5/36e5);
+        el.textContent="Faltan "+days+" días y "+hrs+" h";}
+      tick();setInterval(tick,60000);
+    });
+  }
+  function initMap(){var b=document.getElementById("mapBtn");if(!b)return;b.addEventListener("click",function(){
+    var f=document.createElement("iframe");f.title="Mapa de Taberna de Castilla";f.loading="lazy";f.referrerPolicy="no-referrer-when-downgrade";
+    f.src="https://maps.google.com/maps?q=Taberna%20de%20Castilla%2C%20Glorieta%20de%20Miguel%20Rubiales%204%2C%20Madrid&z=16&output=embed";
+    b.replaceWith(f);});}
+  function initForm(){var form=document.getElementById("resForm");if(!form)return;
+    var d=document.getElementById("fecha");if(d){var t=new Date();d.min=t.toISOString().slice(0,10);}
+    form.addEventListener("submit",function(e){e.preventDefault();if(!form.reportValidity())return;form.classList.add("sent");form.scrollIntoView({behavior:"smooth",block:"center"});});}
+  function initAnchors(){document.addEventListener("click",function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute("href");if(!id||id==="#")return;var el=document.querySelector(id);if(!el)return;e.preventDefault();var y=el.getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:y,behavior:"smooth"});});}
+  function boot(){safe(initOpen,"open");safe(initNav,"nav");safe(initReveals,"reveals");safe(initCountdown,"countdown");safe(initMap,"map");safe(initForm,"form");safe(initAnchors,"anchors");}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+})();
+</script>
+</body>
+</html>
